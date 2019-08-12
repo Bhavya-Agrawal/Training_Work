@@ -3,7 +3,7 @@ from flask_restful import Resource, Api, reqparse
 from flask_jwt import JWT, jwt_required
 
 from security import authenticate, identity
-from resources.user import UserRegister
+from resources.user import UserRegister, User
 from resources.item import Item, Itemlist
 from resources.store import Store, StoreList
 #from models.item import ItemModel
@@ -15,6 +15,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 # if an object is created but not stored in database so sqlalchemy starts tracking so to make it off we are using this as false here
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['PROPAGATE_EXCEPTIONS'] = True
 #define a secret key for app
 app.secret_key = 'abc123'
 api = Api(app)
@@ -28,6 +29,7 @@ api.add_resource(Itemlist, '/items')
 api.add_resource(UserRegister, '/user_register')
 api.add_resource(StoreList, '/stores')
 api.add_resource(Store, '/store/<string:name>')
+api.add_resource(User, '/user/<int:user_id>')
 
 if __name__ == "__main__":
     # imorting here to avoid circular import due to importing table at top because of models, as this will cause running db again and again

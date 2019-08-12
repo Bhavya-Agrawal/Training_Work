@@ -34,7 +34,7 @@ class Item(Resource):
         #data = request.get_json()
         data = Item.parser.parse_args()
         # the new item posted will access name as given by us and price of old data
-        item = ItemModel(name, data['price'], data['store_id'])
+        item = ItemModel(name, **data)
 
         try:
             item.save_to_db()
@@ -63,7 +63,7 @@ class Item(Resource):
         #item here is an item bject
         item = ItemModel.find_by_name(name)
         if item is None:
-            item = ItemModel(name, data['price'], data['store_id'])
+            item = ItemModel(name, **data)
         else:
             item.price = data['price']
 
