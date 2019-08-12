@@ -19,10 +19,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'abc123'
 api = Api(app)
 
-# in order to create table using sqlalchemy itself use a decorator and this will run before any other request in file and will go to sqlite///data.db after creating that
-@app.before_first_request
-def create_tables():
-    db.create_all()
 
 jwt = JWT(app, authenticate, identity)  # call auth thus run as http://127.0.0.1:5000/auth on postman with Post request to get access-token
 
