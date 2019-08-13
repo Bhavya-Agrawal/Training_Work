@@ -1,6 +1,6 @@
-#Flask Restful with SQLAlchemy
+# Flask Restful with SQLAlchemy
 
-##Requirements
+## Requirements
 ```
 pip install FLask
 pip install Flask-SQLAlchemy
